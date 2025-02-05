@@ -1,0 +1,170 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://c5rsa3jy0g0ya"
+path="res://.godot/imported/blocks.blend-af7571baac9460ebb0b4bcbe0a6ae2a0.scn"
+
+[deps]
+
+source_file="res://parry_tank/models/blocks/models/blocks.blend"
+dest_files=["res://.godot/imported/blocks.blend-af7571baac9460ebb0b4bcbe0a6ae2a0.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"materials": {
+"lambert1": {
+"use_external/enabled": true,
+"use_external/path": "res://parry_tank/materials/blocks.tres"
+}
+},
+"meshes": {
+"blocks_BarrleLarge": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_BarrleLarge.res"
+},
+"blocks_BarrleMedium": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_BarrleMedium.res"
+},
+"blocks_BarrleSmall": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_BarrleSmall.res"
+},
+"blocks_FullCube": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_FullCube.res"
+},
+"blocks_HalfCube": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_HalfCube.res"
+},
+"blocks_LargeCube": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_LargeCube.res"
+},
+"blocks_Ramp": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_Ramp.res"
+},
+"blocks_Roof": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_Roof.res"
+},
+"blocks_StretchCube": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://parry_tank/models/blocks/models/blocks_StretchCube.res"
+}
+},
+"nodes": {
+"PATH:BarrleLarge": {
+"physics/shape_type": 5,
+"primitive/height": 4.0,
+"primitive/position": Vector3(0, 1, 0),
+"primitive/rotation": Vector3(90, 0, 0)
+},
+"PATH:BarrleMedium": {
+"physics/shape_type": 5,
+"primitive/height": 3.0,
+"primitive/position": Vector3(0, 1, 0),
+"primitive/rotation": Vector3(90, 0, 0)
+},
+"PATH:BarrleSmall": {
+"physics/shape_type": 5,
+"primitive/height": 2.0,
+"primitive/position": Vector3(0, 1, 0),
+"primitive/rotation": Vector3(90, 0, 0)
+},
+"PATH:HalfCube": {
+"physics/shape_type": 3,
+"primitive/position": Vector3(0, 0.25, 0),
+"primitive/size": Vector3(1, 0.5, 1)
+},
+"PATH:Ramp": {
+"generate/physics": true,
+"physics/shape_type": 1
+}
+}
+}
+blender/nodes/visible=0
+blender/nodes/active_collection_only=false
+blender/nodes/punctual_lights=true
+blender/nodes/cameras=true
+blender/nodes/custom_properties=true
+blender/nodes/modifiers=1
+blender/meshes/colors=false
+blender/meshes/uvs=true
+blender/meshes/normals=true
+blender/meshes/tangents=true
+blender/meshes/skins=2
+blender/meshes/export_bones_deforming_mesh_only=false
+blender/materials/unpack_enabled=true
+blender/materials/export_materials=1
+blender/animation/limit_playback=true
+blender/animation/always_sample=true
+blender/animation/group_tracks=true

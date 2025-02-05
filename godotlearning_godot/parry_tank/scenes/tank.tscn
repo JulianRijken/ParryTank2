@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://b8hwtkeakldbb"]
+
+[ext_resource type="Script" path="res://parry_tank/scripts/tank.gd" id="1_28f3n"]
+[ext_resource type="Material" uid="uid://c81yusw4x6erv" path="res://parry_tank/materials/player_body.tres" id="2_02ttt"]
+[ext_resource type="ArrayMesh" uid="uid://c8wemmucdajnf" path="res://parry_tank/models/tank/parryTank_Mesh.res" id="2_niwc2"]
+[ext_resource type="ArrayMesh" uid="uid://c2rmlmlbwxkyq" path="res://parry_tank/models/tank/parryTank_Mesh_001.res" id="3_55chv"]
+[ext_resource type="ArrayMesh" uid="uid://ccm8xu8nguyql" path="res://parry_tank/models/tank/parryTank_Mesh_002.res" id="4_v4ndw"]
+[ext_resource type="ArrayMesh" uid="uid://cl03fbs4ci427" path="res://parry_tank/models/tank/parryTank_Mesh_003.res" id="5_oo4ae"]
+[ext_resource type="Material" uid="uid://x71sxdgtio76" path="res://parry_tank/materials/player_tracks.tres" id="6_ot0gr"]
+[ext_resource type="ArrayMesh" uid="uid://bkmr4fpe13qra" path="res://parry_tank/models/tank/parryTank_Mesh_004.res" id="6_t2i30"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_raekl"]
+height = 1.5
+
+[node name="Tank" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00734472, 0)
+script = ExtResource("1_28f3n")
+_bodyRotationSpeed = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_raekl")
+
+[node name="top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160544, 0.373678, 0)
+material_override = ExtResource("2_02ttt")
+mesh = ExtResource("3_55chv")
+
+[node name="barrle" type="MeshInstance3D" parent="top"]
+transform = Transform3D(1.00096, 0, 0, 0, 1.70616, 0, 0, 0, 1.87402, 0.237801, 0.135889, 0)
+material_override = ExtResource("2_02ttt")
+mesh = ExtResource("4_v4ndw")
+skeleton = NodePath("../..")
+
+[node name="body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160544, 0, 0)
+material_override = ExtResource("2_02ttt")
+mesh = ExtResource("2_niwc2")
+
+[node name="track_l" type="MeshInstance3D" parent="body"]
+material_override = ExtResource("6_ot0gr")
+mesh = ExtResource("5_oo4ae")
+skeleton = NodePath("../..")
+
+[node name="track_r" type="MeshInstance3D" parent="body"]
+material_override = ExtResource("6_ot0gr")
+mesh = ExtResource("6_t2i30")
+skeleton = NodePath("../..")

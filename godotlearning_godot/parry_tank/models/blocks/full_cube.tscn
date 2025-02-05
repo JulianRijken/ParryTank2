@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgukaefwdigo0"]
+
+[ext_resource type="ArrayMesh" uid="uid://ctr3k0d1ua5aw" path="res://parry_tank/models/blocks/models/blocks_FullCube.res" id="1_cr78n"]
+[ext_resource type="Script" path="res://parry_tank/scripts/block.gd" id="2_ilujf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vm7a8"]
+
+[node name="full_cube" type="MeshInstance3D"]
+mesh = ExtResource("1_cr78n")
+script = ExtResource("2_ilujf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_vm7a8")

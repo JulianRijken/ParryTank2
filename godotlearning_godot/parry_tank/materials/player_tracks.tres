@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://x71sxdgtio76"]
+
+[sub_resource type="Gradient" id="Gradient_xwq8y"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u2lqy"]
+gradient = SubResource("Gradient_xwq8y")
+
+[resource]
+albedo_color = Color(0.416492, 0.546101, 0.923269, 1)
+roughness = 0.62
+rim_enabled = true
+clearcoat = 0.37
+ao_light_affect = 0.61
+heightmap_scale = 8.685
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("GradientTexture1D_u2lqy")
+backlight = Color(0.912289, 0.912289, 0.912289, 1)
