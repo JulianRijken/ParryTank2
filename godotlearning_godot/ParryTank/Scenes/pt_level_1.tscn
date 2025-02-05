@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://c6u33fwe38dsa"]
+
+[ext_resource type="Shader" path="res://ParryTank/Shaders/ca.gdshader" id="1_08fef"]
+[ext_resource type="PackedScene" uid="uid://b8hwtkeakldbb" path="res://ParryTank/Scenes/tank.tscn" id="1_sylj0"]
+[ext_resource type="Texture2D" uid="uid://ccqxf1p1tkkpu" path="res://ParryTank/textures/FloorPlanks2.jpg" id="2_brd0e"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xowii"]
+sky_top_color = Color(0.351661, 0.417676, 0.509514, 1)
+sky_horizon_color = Color(0.905709, 0.792219, 0.45563, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+energy_multiplier = 0.8
+
+[sub_resource type="Sky" id="Sky_0j2t2"]
+sky_material = SubResource("ProceduralSkyMaterial_xowii")
+
+[sub_resource type="Environment" id="Environment_662ne"]
+background_mode = 2
+sky = SubResource("Sky_0j2t2")
+ambient_light_source = 3
+ssr_enabled = true
+ssao_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+glow_blend_mode = 1
+volumetric_fog_density = 0.03
+volumetric_fog_ambient_inject = 1.65
+adjustment_enabled = true
+adjustment_contrast = 1.16
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ftsyc"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 16.26
+dof_blur_far_transition = 10.0
+dof_blur_near_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xehd6"]
+shader = ExtResource("1_08fef")
+shader_parameter/aspect = 1.0
+shader_parameter/distortion = 2.0
+shader_parameter/radius = 2.0
+shader_parameter/alpha = 1.0
+shader_parameter/crop = 0.943
+shader_parameter/crop_color = Color(0.262932, 0.262932, 0.262932, 0.133333)
+shader_parameter/crop_feathering = 0.1
+shader_parameter/channel_offset = 0.005
+shader_parameter/noise_strength = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkhyp"]
+albedo_texture = ExtResource("2_brd0e")
+metallic_specular = 0.61
+roughness = 0.66
+uv1_scale = Vector3(1000, 1000, 1000)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_47jmb"]
+material = SubResource("StandardMaterial3D_hkhyp")
+size = Vector2(22000, 14000)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7hbls"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uihl7"]
+metallic = 0.5
+metallic_specular = 0.96
+roughness = 0.02
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x0bki"]
+
+[node name="ParryTank" type="Node3D"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_662ne")
+camera_attributes = SubResource("CameraAttributesPractical_ftsyc")
+
+[node name="CromaticAberration" type="ColorRect" parent="Environment/WorldEnvironment"]
+material = SubResource("ShaderMaterial_xehd6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vignette" type="ColorRect" parent="Environment/WorldEnvironment"]
+material = SubResource("ShaderMaterial_xehd6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.939651, 0.238952, 0.244863, 1.36756e-08, -0.715693, 0.698415, 0.342135, 0.656267, 0.672501, 0, 1.94743, 0)
+light_energy = 0.7
+shadow_enabled = true
+shadow_blur = 2.0
+
+[node name="Tank" parent="." instance=ExtResource("1_sylj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000674486, 0.987682, -0.00748754)
+
+[node name="TopView" type="Camera3D" parent="."]
+transform = Transform3D(-1, -6.18172e-08, 6.18172e-08, 0, 0.707107, 0.707107, -8.74228e-08, 0.707107, -0.707107, 0, 10, -9.5)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_47jmb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_7hbls")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.08088, 0, 0, 0, 0.366917, 0, 0, 0, 3.98832, 4.66579, 0.139589, -1.20019)
+material_override = SubResource("StandardMaterial3D_uihl7")
+mesh = SubResource("CylinderMesh_x0bki")

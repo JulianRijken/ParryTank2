@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8hwtkeakldbb"]
+
+[ext_resource type="Script" path="res://ParryTank/scripts/tank.gd" id="1_uvdiw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_w16ut"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j44ku"]
+
+[node name="Tank" type="CharacterBody3D"]
+script = ExtResource("1_uvdiw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_w16ut")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_j44ku")
