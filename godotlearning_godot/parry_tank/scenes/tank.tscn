@@ -26,7 +26,7 @@ material_override = ExtResource("2_02ttt")
 mesh = ExtResource("3_55chv")
 
 [node name="barrel" type="MeshInstance3D" parent="top"]
-transform = Transform3D(1.00096, 0, 0, 0, 1.70616, 0, 0, 0, 1.87402, 0.237801, 0.135889, 0)
+transform = Transform3D(0.942, 0, 0, 0, 1.308, 0, 0, 0, 1.437, 0.237801, 0.135889, 0)
 material_override = ExtResource("2_02ttt")
 mesh = ExtResource("4_v4ndw")
 skeleton = NodePath("../..")
