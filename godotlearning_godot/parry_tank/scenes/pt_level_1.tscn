@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c6u33fwe38dsa"]
+[gd_scene load_steps=18 format=3 uid="uid://c6u33fwe38dsa"]
 
 [ext_resource type="Shader" path="res://parry_tank/shaders/ca.gdshader" id="1_08fef"]
 [ext_resource type="PackedScene" uid="uid://b8hwtkeakldbb" path="res://parry_tank/scenes/tank.tscn" id="1_sylj0"]
@@ -7,6 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://dc48dvknh328r" path="res://parry_tank/models/blocks/barrle_large.tscn" id="5_jgygy"]
 [ext_resource type="PackedScene" uid="uid://dha4htmqwp8l2" path="res://parry_tank/models/blocks/roof.tscn" id="6_edxlf"]
 [ext_resource type="PackedScene" uid="uid://bgukaefwdigo0" path="res://parry_tank/models/blocks/full_cube.tscn" id="7_4jhcy"]
+[ext_resource type="PackedScene" uid="uid://bdyp2wwyn8hhn" path="res://parry_tank/scenes/cursor.tscn" id="8_pevbm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ml8kk"]
+shader = ExtResource("1_08fef")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-3, 0)
+shader_parameter/height = 0.7
+shader_parameter/width = 0.5
+shader_parameter/fade = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyey3"]
+shader = ExtResource("2_yim2j")
+shader_parameter/outerRadius = 0.803
+shader_parameter/MainAlpha = 0.227
+shader_parameter/vignette_color = null
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xowii"]
 sky_top_color = Color(0.351661, 0.417676, 0.509514, 1)
@@ -36,21 +52,6 @@ adjustment_contrast = 1.16
 dof_blur_far_distance = 16.26
 dof_blur_far_transition = 10.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ml8kk"]
-shader = ExtResource("1_08fef")
-shader_parameter/r_displacement = Vector2(3, 0)
-shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(-3, 0)
-shader_parameter/height = 0.7
-shader_parameter/width = 0.5
-shader_parameter/fade = 0.7
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyey3"]
-shader = ExtResource("2_yim2j")
-shader_parameter/outerRadius = 0.803
-shader_parameter/MainAlpha = 0.227
-shader_parameter/vignette_color = null
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkhyp"]
 albedo_texture = ExtResource("2_brd0e")
 metallic_specular = 0.61
@@ -69,11 +70,7 @@ subdivide_depth = 4
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment_662ne")
-camera_attributes = SubResource("CameraAttributesPractical_ftsyc")
-
-[node name="CromaticAberration" type="ColorRect" parent="Environment/WorldEnvironment"]
+[node name="CromaticAberration" type="ColorRect" parent="Environment"]
 material = SubResource("ShaderMaterial_ml8kk")
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,13 +78,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Vignette" type="ColorRect" parent="Environment/WorldEnvironment"]
+[node name="Vignette" type="ColorRect" parent="Environment"]
 material = SubResource("ShaderMaterial_gyey3")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_662ne")
+camera_attributes = SubResource("CameraAttributesPractical_ftsyc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.939651, 0.238952, 0.244863, 1.36756e-08, -0.715693, 0.698415, 0.342135, 0.656267, 0.672501, 3.13483, 10.8888, 8.60961)
@@ -172,3 +173,5 @@ far = 100.0
 
 [node name="Tank" parent="." instance=ExtResource("1_sylj0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.705542, 0.00734472, -0.762064)
+
+[node name="Cursor" parent="." instance=ExtResource("8_pevbm")]

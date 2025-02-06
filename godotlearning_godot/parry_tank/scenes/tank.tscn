@@ -10,15 +10,14 @@
 [ext_resource type="ArrayMesh" uid="uid://bkmr4fpe13qra" path="res://parry_tank/models/tank/parryTank_Mesh_004.res" id="6_t2i30"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_raekl"]
-height = 1.5
+height = 0.8
 
 [node name="Tank" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00734472, 0)
 script = ExtResource("1_28f3n")
-_bodyRotationSpeed = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CylinderShape3D_raekl")
 
 [node name="top" type="MeshInstance3D" parent="."]
@@ -26,7 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160544, 0.373678, 0)
 material_override = ExtResource("2_02ttt")
 mesh = ExtResource("3_55chv")
 
-[node name="barrle" type="MeshInstance3D" parent="top"]
+[node name="barrel" type="MeshInstance3D" parent="top"]
 transform = Transform3D(1.00096, 0, 0, 0, 1.70616, 0, 0, 0, 1.87402, 0.237801, 0.135889, 0)
 material_override = ExtResource("2_02ttt")
 mesh = ExtResource("4_v4ndw")
