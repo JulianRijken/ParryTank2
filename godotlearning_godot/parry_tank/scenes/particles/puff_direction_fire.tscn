@@ -1,0 +1,70 @@
+[gd_scene load_steps=13 format=3 uid="uid://bjnxffl30mcby"]
+
+[sub_resource type="Curve" id="Curve_1sus2"]
+_data = [Vector2(0, 0), 0.0, 5.83411, 0, 0, Vector2(0.226415, 0.523256), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.480999, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_h0qvt"]
+curve = SubResource("Curve_1sus2")
+
+[sub_resource type="Curve" id="Curve_notcj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4awom"]
+curve = SubResource("Curve_notcj")
+
+[sub_resource type="Gradient" id="Gradient_fi5do"]
+colors = PackedColorArray(0.96, 0.2392, 0.144, 1, 1, 0.939333, 0.09, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vsq08"]
+gradient = SubResource("Gradient_fi5do")
+
+[sub_resource type="Curve" id="Curve_uov70"]
+_data = [Vector2(0, 0), 0.0, 3.94418, 0, 0, Vector2(0.242925, 1), -1.75153, -1.75153, 0, 0, Vector2(1, 0), 0.186751, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ql045"]
+curve = SubResource("Curve_uov70")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cdoel"]
+lifetime_randomness = 0.3
+angle_min = -266.1
+angle_max = 385.0
+angle_curve = SubResource("CurveTexture_4awom")
+spread = 40.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_ql045")
+color_initial_ramp = SubResource("GradientTexture1D_vsq08")
+alpha_curve = SubResource("CurveTexture_h0qvt")
+turbulence_enabled = true
+turbulence_noise_scale = 0.668
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bnle3"]
+load_path = "res://.godot/imported/PolygonParticles_Circle_01.png-e19845dccd9c70bbd3dfee323e8409c9.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5trrn"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_bnle3")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5i77s"]
+material = SubResource("StandardMaterial3D_5trrn")
+
+[node name="PuffDirectionFire" type="GPUParticles3D"]
+emitting = false
+amount = 6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_cdoel")
+draw_pass_1 = SubResource("QuadMesh_5i77s")

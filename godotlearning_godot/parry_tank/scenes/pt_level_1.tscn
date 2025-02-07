@@ -175,3 +175,6 @@ far = 100.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.705542, 0.00734472, -0.762064)
 
 [node name="Cursor" parent="." instance=ExtResource("8_pevbm")]
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+size = Vector3(1000, 0, 1000)

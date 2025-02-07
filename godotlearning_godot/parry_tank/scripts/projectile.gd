@@ -7,6 +7,8 @@ extends RigidBody3D
 @export var maxLifeTime: float = 4
 @export var damage: float = 100
 
+@onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+
 
 var timesBounced: int
 var moveDirection: Vector3
@@ -41,5 +43,5 @@ func on_collision(hit_normal: Vector3) -> void:
 
 func explode() -> void:
 	AudioManager.play_audio("bullet_explode")
-	queue_free()
+	animationPlayer.play("explode")
 	

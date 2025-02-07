@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://brg1ec6l6ox27"]
+
+[ext_resource type="ArrayMesh" uid="uid://dq715joqct5m7" path="res://parry_tank/models/particles/particles_FX_Sphere_03.res" id="1_n2n7f"]
+[ext_resource type="Script" path="res://parry_tank/scenes/particles/emit_over_distance.gd" id="2_ccee3"]
+
+[sub_resource type="Curve" id="Curve_ovktp"]
+_data = [Vector2(0, 0), 0.0, 7.05851, 0, 0, Vector2(0.142336, 0.494012), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.80919, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_55ki3"]
+curve = SubResource("Curve_ovktp")
+
+[sub_resource type="Curve" id="Curve_r3w2c"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xs1l0"]
+curve = SubResource("Curve_r3w2c")
+
+[sub_resource type="Curve" id="Curve_5sat5"]
+max_value = 3.0
+_data = [Vector2(0, 0), 0.0, 101.519, 0, 0, Vector2(0.0839416, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.83168, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e4neq"]
+curve = SubResource("Curve_5sat5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dgsta"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -713.0
+angle_max = 720.0
+angle_curve = SubResource("CurveTexture_xs1l0")
+gravity = Vector3(0, 3.181, 0)
+radial_accel_min = -5.81
+radial_accel_max = 5.16
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_e4neq")
+alpha_curve = SubResource("CurveTexture_55ki3")
+
+[node name="SmokeTrail" type="GPUParticles3D"]
+emitting = false
+amount = 100
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_dgsta")
+draw_pass_1 = ExtResource("1_n2n7f")
+script = ExtResource("2_ccee3")
+min_distance = 0.5

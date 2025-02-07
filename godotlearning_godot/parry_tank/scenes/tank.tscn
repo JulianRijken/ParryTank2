@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8hwtkeakldbb"]
+[gd_scene load_steps=16 format=3 uid="uid://b8hwtkeakldbb"]
 
 [ext_resource type="Script" path="res://parry_tank/scripts/tank.gd" id="1_28f3n"]
 [ext_resource type="Material" uid="uid://c81yusw4x6erv" path="res://parry_tank/materials/player_body.tres" id="2_02ttt"]
@@ -9,6 +9,83 @@
 [ext_resource type="ArrayMesh" uid="uid://cl03fbs4ci427" path="res://parry_tank/models/tank/parryTank_Mesh_003.res" id="5_oo4ae"]
 [ext_resource type="Material" uid="uid://x71sxdgtio76" path="res://parry_tank/materials/player_tracks.tres" id="6_ot0gr"]
 [ext_resource type="ArrayMesh" uid="uid://bkmr4fpe13qra" path="res://parry_tank/models/tank/parryTank_Mesh_004.res" id="6_t2i30"]
+[ext_resource type="PackedScene" uid="uid://bqi73awj0hy4j" path="res://parry_tank/scenes/particles/puff_direction_smoke.tscn" id="6_u0ilj"]
+[ext_resource type="PackedScene" uid="uid://bjnxffl30mcby" path="res://parry_tank/scenes/particles/puff_direction_fire.tscn" id="7_va881"]
+
+[sub_resource type="Animation" id="Animation_j2of8"]
+
+[sub_resource type="Animation" id="Animation_uipeh"]
+resource_name = "fire"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotatePoint/Top/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.237801, 0.135889, 0), Vector3(-0.1, 0.136, 0), Vector3(0.237801, 0.135889, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotatePoint/Top/Barrel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.942, 1.308, 1.437), Vector3(1.16, 1.611, 1.77), Vector3(0.942, 1.308, 1.437)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotatePoint/Top:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.05, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RotatePoint/Top/FirePoint/SmokePuff")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RotatePoint/Top/FirePoint/FirePuff")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jxj7j"]
+_data = {
+"RESET": SubResource("Animation_j2of8"),
+"fire": SubResource("Animation_uipeh")
+}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_raekl"]
 height = 0.8
@@ -18,35 +95,50 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00734472, 0)
 script = ExtResource("1_28f3n")
 _bullet = ExtResource("2_v3u3v")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jxj7j")
+}
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CylinderShape3D_raekl")
 
-[node name="top" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160544, 0.373678, 0)
+[node name="RotatePoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.374, 0)
+
+[node name="Top" type="MeshInstance3D" parent="RotatePoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
 material_override = ExtResource("2_02ttt")
 mesh = ExtResource("3_55chv")
-
-[node name="barrel" type="MeshInstance3D" parent="top"]
-transform = Transform3D(0.942, 0, 0, 0, 1.308, 0, 0, 0, 1.437, 0.237801, 0.135889, 0)
-material_override = ExtResource("2_02ttt")
-mesh = ExtResource("4_v4ndw")
 skeleton = NodePath("../..")
 
-[node name="firePoint" type="Marker3D" parent="top"]
-transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.740124, 0.134324, -3.97263e-09)
+[node name="Barrel" type="MeshInstance3D" parent="RotatePoint/Top"]
+transform = Transform3D(1.16, 0, 0, 0, 1.611, 0, 0, 0, 1.77, -0.1, 0.136, 0)
+material_override = ExtResource("2_02ttt")
+mesh = ExtResource("4_v4ndw")
+skeleton = NodePath("../../..")
 
-[node name="body" type="MeshInstance3D" parent="."]
+[node name="FirePoint" type="Marker3D" parent="RotatePoint/Top"]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.779366, 0.134324, -3.97263e-09)
+
+[node name="SmokePuff" parent="RotatePoint/Top/FirePoint" instance=ExtResource("6_u0ilj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.11489e-09, 0, -0.305845)
+
+[node name="FirePuff" parent="RotatePoint/Top/FirePoint" instance=ExtResource("7_va881")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.11489e-09, 0, -0.305845)
+
+[node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160544, 0, 0)
 material_override = ExtResource("2_02ttt")
 mesh = ExtResource("2_niwc2")
 
-[node name="track_l" type="MeshInstance3D" parent="body"]
+[node name="TrackL" type="MeshInstance3D" parent="Body"]
 material_override = ExtResource("6_ot0gr")
 mesh = ExtResource("5_oo4ae")
 skeleton = NodePath("../..")
 
-[node name="track_r" type="MeshInstance3D" parent="body"]
+[node name="TrackR" type="MeshInstance3D" parent="Body"]
 material_override = ExtResource("6_ot0gr")
 mesh = ExtResource("6_t2i30")
 skeleton = NodePath("../..")

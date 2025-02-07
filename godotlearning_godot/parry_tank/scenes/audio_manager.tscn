@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bof51ccf0abhn"]
+[gd_scene load_steps=11 format=3 uid="uid://bof51ccf0abhn"]
 
 [ext_resource type="Script" path="res://addons/audio_manager_3d/audio_manager_3d.gd" id="1_wiru7"]
 [ext_resource type="Script" path="res://addons/audio_manager_3d/audio_manager_resource.gd" id="2_3sdld"]
 [ext_resource type="AudioStream" uid="uid://st5fbcl3cf02" path="res://parry_tank/sound/BulletBounce.wav" id="3_nnsc2"]
 [ext_resource type="AudioStream" uid="uid://tvy4asmwjlgx" path="res://parry_tank/sound/BulletExplode.wav" id="4_8yv1i"]
+[ext_resource type="AudioStream" uid="uid://dkr8g4lvdbqdo" path="res://parry_tank/sound/FireSoft.wav" id="5_ovfbe"]
+[ext_resource type="AudioStream" uid="uid://c3y61q4ts202t" path="res://parry_tank/sound/FireHard.wav" id="5_w4p4f"]
 
 [sub_resource type="Resource" id="Resource_jk3vb"]
 script = ExtResource("2_3sdld")
@@ -45,6 +47,46 @@ auto_play = false
 max_polyphony = 1
 panning_strength = 1.0
 
+[sub_resource type="Resource" id="Resource_gdgfd"]
+script = ExtResource("2_3sdld")
+audio_name = "fireSoft"
+disable_attenuation = true
+audio_stream = ExtResource("5_ovfbe")
+use_clipper = false
+start_time = 0.0
+end_time = 0.0
+volume_db = 0.0
+max_db = 3.0
+pitch_scale = 1.0
+random_pitch_offset = Vector2(-0.05, 0.05)
+max_distance = 100.0
+unit_size = 10.0
+loop = false
+loop_offset = 0.0
+auto_play = false
+max_polyphony = 1
+panning_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_jyx53"]
+script = ExtResource("2_3sdld")
+audio_name = "fireHard"
+disable_attenuation = true
+audio_stream = ExtResource("5_w4p4f")
+use_clipper = false
+start_time = 0.0
+end_time = 0.0
+volume_db = 0.0
+max_db = 3.0
+pitch_scale = 1.0
+random_pitch_offset = Vector2(-0.05, 0.05)
+max_distance = 100.0
+unit_size = 10.0
+loop = false
+loop_offset = 0.0
+auto_play = false
+max_polyphony = 1
+panning_strength = 1.0
+
 [node name="AudioManager" type="Node3D"]
 script = ExtResource("1_wiru7")
-audios = Array[ExtResource("2_3sdld")]([SubResource("Resource_jk3vb"), SubResource("Resource_8g8xa")])
+audios = Array[ExtResource("2_3sdld")]([SubResource("Resource_jk3vb"), SubResource("Resource_8g8xa"), SubResource("Resource_gdgfd"), SubResource("Resource_jyx53")])

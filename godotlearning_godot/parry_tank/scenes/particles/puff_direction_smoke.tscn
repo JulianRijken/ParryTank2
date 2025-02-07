@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=3 uid="uid://bqi73awj0hy4j"]
+
+[sub_resource type="Curve" id="Curve_1sus2"]
+_data = [Vector2(0, 0), 0.0, 5.83411, 0, 0, Vector2(0.226415, 0.523256), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.480999, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_h0qvt"]
+curve = SubResource("Curve_1sus2")
+
+[sub_resource type="Curve" id="Curve_notcj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4awom"]
+curve = SubResource("Curve_notcj")
+
+[sub_resource type="Gradient" id="Gradient_susdi"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3o0os"]
+gradient = SubResource("Gradient_susdi")
+
+[sub_resource type="Curve" id="Curve_pqdxe"]
+max_value = 100.0
+_data = [Vector2(0.330189, 0), 0.0, 410.853, 0, 0, Vector2(0.629717, 34.3023), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bkxp2"]
+curve = SubResource("Curve_pqdxe")
+
+[sub_resource type="Curve" id="Curve_uov70"]
+_data = [Vector2(0, 0), 0.0, 3.94418, 0, 0, Vector2(0.242925, 1), -1.75153, -1.75153, 0, 0, Vector2(1, 0), 0.186751, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ql045"]
+curve = SubResource("Curve_uov70")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0qxe6"]
+lifetime_randomness = 0.3
+angle_min = -266.1
+angle_max = 385.0
+angle_curve = SubResource("CurveTexture_4awom")
+spread = 25.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+damping_max = 1.0
+damping_curve = SubResource("CurveTexture_bkxp2")
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_ql045")
+color_initial_ramp = SubResource("GradientTexture1D_3o0os")
+alpha_curve = SubResource("CurveTexture_h0qvt")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bnle3"]
+load_path = "res://.godot/imported/PolygonParticles_Circle_01.png-e19845dccd9c70bbd3dfee323e8409c9.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5trrn"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_bnle3")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5i77s"]
+material = SubResource("StandardMaterial3D_5trrn")
+
+[node name="PuffDirectionSmoke" type="GPUParticles3D"]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_0qxe6")
+draw_pass_1 = SubResource("QuadMesh_5i77s")

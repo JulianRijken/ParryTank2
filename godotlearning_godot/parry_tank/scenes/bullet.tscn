@@ -1,11 +1,111 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3i11qjtiau18"]
+[gd_scene load_steps=11 format=3 uid="uid://c3i11qjtiau18"]
 
 [ext_resource type="Script" path="res://parry_tank/scripts/projectile.gd" id="1_kpsdj"]
+[ext_resource type="PackedScene" uid="uid://brg1ec6l6ox27" path="res://parry_tank/scenes/particles/smoke_trail.tscn" id="2_23fo2"]
 [ext_resource type="ArrayMesh" uid="uid://ce0il5fi1jp78" path="res://parry_tank/models/bullet/bullet_Bullet.res" id="2_amegj"]
+[ext_resource type="PackedScene" uid="uid://bx4007pinwq5q" path="res://parry_tank/scenes/particles/fire_ball.tscn" id="3_d6nvp"]
+[ext_resource type="PackedScene" uid="uid://7mry0mrs45hm" path="res://parry_tank/scenes/particles/puff_orbit_smoke.tscn" id="4_7be2g"]
+
+[sub_resource type="Animation" id="Animation_g3rq8"]
+resource_name = "explode"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BulletMesh")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FireBall")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PuffOrbitSmoke")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6gn18"]
+_data = {
+"explode": SubResource("Animation_g3rq8")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7mj5o"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jo8t"]
+albedo_color = Color(0.74518, 0.76, 0.4636, 1)
+metallic_specular = 1.0
+roughness = 0.77
+emission = Color(0.983333, 1, 0, 1)
+rim_enabled = true
+rim = 0.3
+rim_tint = 1.0
+clearcoat_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hy258"]
+emission_enabled = true
+emission = Color(0.990167, 1, 0.41, 1)
+emission_energy_multiplier = 2.0
+
 [node name="Bullet" type="RigidBody3D"]
+physics_interpolation_mode = 1
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -17,10 +117,30 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_kpsdj")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6gn18")
+}
+
+[node name="SmokeTrail" parent="." instance=ExtResource("2_23fo2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.382136)
+
+[node name="FireBall" parent="." instance=ExtResource("3_d6nvp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.400945)
+
+[node name="PuffOrbitSmoke" parent="." instance=ExtResource("4_7be2g")]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.368, 0, 0, 0, 0.368, 0, 0, 0, 0.368, 0, 0, 0)
 shape = SubResource("SphereShape3D_7mj5o")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="BulletMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_0jo8t")
 mesh = ExtResource("2_amegj")
+
+[node name="Light" type="MeshInstance3D" parent="BulletMesh"]
+transform = Transform3D(1.00897, 0, 0, 0, -1.00897, 3.07337e-08, 0, -8.82075e-08, -0.351552, -0.000384748, -5.36333e-09, -0.347832)
+material_override = SubResource("StandardMaterial3D_hy258")
+mesh = ExtResource("2_amegj")
+skeleton = NodePath("../..")

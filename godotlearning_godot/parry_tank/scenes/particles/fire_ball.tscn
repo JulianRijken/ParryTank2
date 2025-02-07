@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=3 uid="uid://bx4007pinwq5q"]
+
+[ext_resource type="Material" uid="uid://buj2or8j3xvfk" path="res://parry_tank/materials/particle_2D.tres" id="1_4ut24"]
+
+[sub_resource type="Curve" id="Curve_u5pti"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 0.4), 0.0, 0.0, 0, 0, Vector2(0.8, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_slb1b"]
+curve = SubResource("Curve_u5pti")
+
+[sub_resource type="Curve" id="Curve_leg30"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 4.78313, 0, 0, Vector2(1, 1), 4.18266, 0.126174, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w8hvt"]
+curve = SubResource("Curve_leg30")
+
+[sub_resource type="Gradient" id="Gradient_hpl6u"]
+offsets = PackedFloat32Array(0.223577, 0.50813, 0.780488)
+colors = PackedColorArray(0.91, 0.206115, 0.0819, 1, 0.971545, 0.971545, 0.971545, 1, 0.9195, 1, 0.31, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ufcg6"]
+gradient = SubResource("Gradient_hpl6u")
+
+[sub_resource type="Curve" id="Curve_xdf6p"]
+max_value = 3.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.5, 3), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f4607"]
+curve = SubResource("Curve_xdf6p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_egmox"]
+angle_min = -180.0
+angle_max = 180.0
+angle_curve = SubResource("CurveTexture_w8hvt")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.08
+scale_max = 0.12
+scale_curve = SubResource("CurveTexture_f4607")
+color_ramp = SubResource("GradientTexture1D_ufcg6")
+alpha_curve = SubResource("CurveTexture_slb1b")
+
+[sub_resource type="QuadMesh" id="QuadMesh_b2st3"]
+material = ExtResource("1_4ut24")
+
+[node name="FireBall" type="GPUParticles3D"]
+lifetime = 2.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_egmox")
+draw_pass_1 = SubResource("QuadMesh_b2st3")

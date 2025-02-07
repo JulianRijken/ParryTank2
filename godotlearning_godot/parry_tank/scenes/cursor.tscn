@@ -23,13 +23,13 @@ size_flags_vertical = 3
 
 [node name="MouseTrail" type="Line2D" parent="."]
 points = PackedVector2Array(274, 206)
-width = 17.0
 width_curve = SubResource("Curve_t6e2i")
 gradient = SubResource("Gradient_w6531")
 sharp_limit = 8.0
 antialiased = true
 script = ExtResource("1_vgmal")
 _removeTime = 0.15
+_width = 25.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

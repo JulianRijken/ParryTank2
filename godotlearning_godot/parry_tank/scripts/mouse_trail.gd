@@ -16,11 +16,11 @@ var lastPosition: Vector2
 
 @export var _placeInterval: float = 30
 @export var _removeTime: float = 0.2
-
-func _ready() -> void:
-	width = (get_viewport_rect().size.y / 1080)
+@export var _width: float = 0.2
 
 func _process(_delta):
+	width = (get_viewport_rect().size.y / 1080) * _width
+	
 	var pos = get_global_mouse_position()
 	var distanceMoved = Vector2(pos - lastPosition).length()
 	distance += distanceMoved

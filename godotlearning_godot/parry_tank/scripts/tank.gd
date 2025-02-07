@@ -8,8 +8,10 @@ extends CharacterBody3D
 @export var _bodyRotationSpeed: float = 1.5
 @export var _bullet : PackedScene
 
-@onready var bodyMesh: MeshInstance3D = $body
-@onready var topMesh: MeshInstance3D = $top
+@onready var bodyMesh: MeshInstance3D = $Body
+@onready var topMesh: Marker3D = $RotatePoint
+@onready var firePoint: Marker3D = $RotatePoint/Top/FirePoint
+@onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
 var _currentRotation: Quaternion
 var _currentTargetRotation: Quaternion
@@ -27,8 +29,11 @@ func _input(event: InputEvent) -> void:
 		
 func fire() -> void:
 	var bulletInstance = _bullet.instantiate() as Node3D
-	bulletInstance.global_transform = $top/firePoint.global_transform
+	bulletInstance.global_transform = firePoint.global_transform
 	add_sibling(bulletInstance)
+	animationPlayer.stop()
+	animationPlayer.play("fire")
+	AudioManager.play_audio("fireSoft")
 
 func rotate_barrel(delta: float):
 	var aimPlane  = Plane(Vector3(0, 1, 0),topMesh.global_position)
