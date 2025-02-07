@@ -116,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, -4.4)
 skeleton = NodePath("../..")
 
 [node name="barrle_large2" parent="Blocks" instance=ExtResource("5_jgygy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.81736, -9.53674e-07, -7.15761)
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -4.08531, -9.53674e-07, -8.15761)
 skeleton = NodePath("../..")
 
 [node name="barrle_large3" parent="Blocks" instance=ExtResource("5_jgygy")]

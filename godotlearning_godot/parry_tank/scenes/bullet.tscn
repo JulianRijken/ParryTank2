@@ -1,15 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3i11qjtiau18"]
 
 [ext_resource type="Script" path="res://parry_tank/scripts/projectile.gd" id="1_kpsdj"]
-[ext_resource type="ArrayMesh" uid="uid://86p6nf2tf4pj" path="res://parry_tank/models/bullet/bullet_Mesh.res" id="2_gryds"]
+[ext_resource type="ArrayMesh" uid="uid://ce0il5fi1jp78" path="res://parry_tank/models/bullet/bullet_Bullet.res" id="2_amegj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7mj5o"]
 
 [node name="Bullet" type="RigidBody3D"]
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+custom_integrator = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_kpsdj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.368, 0, 0, 0, 0.368, 0, 0, 0, 0.368, 0, 0, 0)
 shape = SubResource("SphereShape3D_7mj5o")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_gryds")
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = ExtResource("2_amegj")

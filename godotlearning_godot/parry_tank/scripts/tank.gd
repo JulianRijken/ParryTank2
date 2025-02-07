@@ -6,6 +6,8 @@ extends CharacterBody3D
 @export var _accelerationSpeed: float = 60
 @export var _decellerationSpeed: float = 20
 @export var _bodyRotationSpeed: float = 1.5
+@export var _bullet : PackedScene
+
 @onready var bodyMesh: MeshInstance3D = $body
 @onready var topMesh: MeshInstance3D = $top
 
@@ -18,7 +20,16 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	rotate_body(delta)
 	rotate_barrel(delta)
-	
+
+func _input(event: InputEvent) -> void:
+	if event.is_pressed() and event.is_action("fire"):
+		fire()
+		
+func fire() -> void:
+	var bulletInstance = _bullet.instantiate() as Node3D
+	bulletInstance.global_transform = $top/firePoint.global_transform
+	add_sibling(bulletInstance)
+
 func rotate_barrel(delta: float):
 	var aimPlane  = Plane(Vector3(0, 1, 0),topMesh.global_position)
 	var mousePosition2D = get_viewport().get_mouse_position()
@@ -55,17 +66,6 @@ func move_tank(delta: float):
 	var moveDirection := Vector2(inputDirection.x, inputDirection.y).normalized()
 	var targetVelocity := Vector2(moveDirection * _speedAxisMultiplier) * _maxSpeed
 	var currentVelocity := Vector2(velocity.x,velocity.z)
-	
-	#var inputAcceleration = Vector2(
-		#moveDirection.x * (1 if currentVelocity.x > 0 else -1),
-		#moveDirection.y * (1 if currentVelocity.y > 0 else -1),
-	#)
-	#DebugDraw3D.draw_arrow(position + Vector3.UP,position + Vector3.UP + Vector3(inputAcceleration.x,0,inputAcceleration.y))
-	
-	#var speedChange = Vector2(
-		#_accelerationSpeed if inputAcceleration.x > 0 else _decellerationSpeed,
-		#_accelerationSpeed if inputAcceleration.y > 0  else _decellerationSpeed)
-
 	var speedChange = Vector2(
 		_accelerationSpeed if abs(moveDirection.x) > 0 else _decellerationSpeed,
 		_accelerationSpeed if abs(moveDirection.y) > 0  else _decellerationSpeed)
@@ -77,5 +77,4 @@ func move_tank(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		
-
 	move_and_slide()

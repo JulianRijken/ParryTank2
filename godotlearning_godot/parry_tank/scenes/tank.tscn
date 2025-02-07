@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8hwtkeakldbb"]
+[gd_scene load_steps=11 format=3 uid="uid://b8hwtkeakldbb"]
 
 [ext_resource type="Script" path="res://parry_tank/scripts/tank.gd" id="1_28f3n"]
 [ext_resource type="Material" uid="uid://c81yusw4x6erv" path="res://parry_tank/materials/player_body.tres" id="2_02ttt"]
 [ext_resource type="ArrayMesh" uid="uid://c8wemmucdajnf" path="res://parry_tank/models/tank/parryTank_Mesh.res" id="2_niwc2"]
+[ext_resource type="PackedScene" uid="uid://c3i11qjtiau18" path="res://parry_tank/scenes/bullet.tscn" id="2_v3u3v"]
 [ext_resource type="ArrayMesh" uid="uid://c2rmlmlbwxkyq" path="res://parry_tank/models/tank/parryTank_Mesh_001.res" id="3_55chv"]
 [ext_resource type="ArrayMesh" uid="uid://ccm8xu8nguyql" path="res://parry_tank/models/tank/parryTank_Mesh_002.res" id="4_v4ndw"]
 [ext_resource type="ArrayMesh" uid="uid://cl03fbs4ci427" path="res://parry_tank/models/tank/parryTank_Mesh_003.res" id="5_oo4ae"]
@@ -15,6 +16,7 @@ height = 0.8
 [node name="Tank" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00734472, 0)
 script = ExtResource("1_28f3n")
+_bullet = ExtResource("2_v3u3v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -30,6 +32,9 @@ transform = Transform3D(0.942, 0, 0, 0, 1.308, 0, 0, 0, 1.437, 0.237801, 0.13588
 material_override = ExtResource("2_02ttt")
 mesh = ExtResource("4_v4ndw")
 skeleton = NodePath("../..")
+
+[node name="firePoint" type="Marker3D" parent="top"]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.740124, 0.134324, -3.97263e-09)
 
 [node name="body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160544, 0, 0)

@@ -18,7 +18,7 @@ var lastPosition: Vector2
 @export var _removeTime: float = 0.2
 
 func _ready() -> void:
-	width * (get_viewport_rect().size.y / 1080)
+	width = (get_viewport_rect().size.y / 1080)
 
 func _process(_delta):
 	var pos = get_global_mouse_position()
