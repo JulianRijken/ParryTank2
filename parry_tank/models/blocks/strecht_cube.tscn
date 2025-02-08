@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhouf4255ym65"]
+
+[ext_resource type="ArrayMesh" uid="uid://dqpdc24qhlabe" path="res://parry_tank/models/blocks/models/blocks_StretchCube.res" id="1_j62c4"]
+[ext_resource type="Material" uid="uid://cy56gguc2yiiu" path="res://parry_tank/materials/block1.tres" id="1_p7ivk"]
+[ext_resource type="Script" path="res://parry_tank/scripts/block.gd" id="2_xjpw2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7jokj"]
+size = Vector3(2, 1, 1.5)
+
+[node name="strecht_cube" type="MeshInstance3D"]
+material_override = ExtResource("1_p7ivk")
+mesh = ExtResource("1_j62c4")
+script = ExtResource("2_xjpw2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_7jokj")

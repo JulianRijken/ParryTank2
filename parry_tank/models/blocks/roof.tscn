@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dha4htmqwp8l2"]
+
+[ext_resource type="Material" uid="uid://cy56gguc2yiiu" path="res://parry_tank/materials/block1.tres" id="1_2glpm"]
+[ext_resource type="ArrayMesh" uid="uid://cakgfv44eoq15" path="res://parry_tank/models/blocks/models/blocks_Roof.res" id="1_scail"]
+[ext_resource type="Script" path="res://parry_tank/scripts/block.gd" id="2_5l4y7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7jokj"]
+size = Vector3(3, 2, 2)
+
+[node name="roof" type="MeshInstance3D"]
+material_override = ExtResource("1_2glpm")
+mesh = ExtResource("1_scail")
+script = ExtResource("2_5l4y7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_7jokj")
