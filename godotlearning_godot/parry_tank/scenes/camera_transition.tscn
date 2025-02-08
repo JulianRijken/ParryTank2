@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3xsrw55gr5rb"]
+
+[ext_resource type="Script" path="res://parry_tank/scripts/camera_transition.gd" id="1_tsetc"]
+
+[node name="CameraTransition" type="Node"]
+script = ExtResource("1_tsetc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+projection = 1
