@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://c6u33fwe38dsa"]
+[gd_scene load_steps=24 format=3 uid="uid://c6u33fwe38dsa"]
 
 [ext_resource type="Shader" path="res://parry_tank/shaders/ca.gdshader" id="1_aopic"]
 [ext_resource type="Shader" path="res://parry_tank/shaders/vignette.gdshader" id="2_y22rt"]
+[ext_resource type="Shader" path="res://parry_tank/shaders/linecell.gdshader" id="3_gfwsd"]
 [ext_resource type="Texture2D" uid="uid://ccqxf1p1tkkpu" path="res://parry_tank/textures/FloorPlanks2.jpg" id="3_uo8r1"]
 [ext_resource type="PackedScene" uid="uid://dc48dvknh328r" path="res://parry_tank/models/blocks/barrle_large.tscn" id="4_jm2mb"]
 [ext_resource type="PackedScene" uid="uid://bgukaefwdigo0" path="res://parry_tank/models/blocks/full_cube.tscn" id="5_me651"]
@@ -25,6 +26,20 @@ shader = ExtResource("2_y22rt")
 shader_parameter/outerRadius = 0.803
 shader_parameter/MainAlpha = 0.227
 shader_parameter/vignette_color = null
+
+[sub_resource type="Gradient" id="Gradient_hysa3"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.190164, 0.340984, 0.508197, 0.668852, 0.852459)
+colors = PackedColorArray(0.909554, 0.649649, 0.235114, 1, 0.941127, 0.291064, 0.616962, 1, 0.211765, 0.211765, 0.835294, 1, 0.0851904, 0.419581, 0.524058, 1, 0.14204, 0.614704, 0.514079, 1, 0.14204, 0.614704, 0.514079, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lrjkv"]
+gradient = SubResource("Gradient_hysa3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hulpx"]
+shader = ExtResource("3_gfwsd")
+shader_parameter/depth = 0.03
+shader_parameter/line_thickness = 7
+shader_parameter/gradient = SubResource("GradientTexture1D_lrjkv")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xowii"]
 sky_top_color = Color(0.351661, 0.417676, 0.509514, 1)
@@ -82,6 +97,15 @@ grow_vertical = 2
 
 [node name="Vignette" type="ColorRect" parent="Environment"]
 material = SubResource("ShaderMaterial_gyey3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineCell" type="ColorRect" parent="Environment"]
+visible = false
+material = SubResource("ShaderMaterial_hulpx")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
