@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctwnefsru6b03"]
 
-[ext_resource type="Material" path="res://parry_tank/materials/block1.tres" id="1_53ejm"]
+[ext_resource type="Material" uid="uid://cy56gguc2yiiu" path="res://parry_tank/materials/block1.tres" id="1_53ejm"]
 [ext_resource type="ArrayMesh" uid="uid://cem58igyk2ayx" path="res://parry_tank/models/blocks/models/blocks_HalfCube.res" id="1_pqqm3"]
-[ext_resource type="Script" path="res://parry_tank/scripts/block.gd" id="2_0c2n8"]
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/block.gd" id="2_0c2n8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vm7a8"]
 size = Vector3(1, 1, 0.5)

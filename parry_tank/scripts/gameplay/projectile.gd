@@ -9,16 +9,19 @@ extends RigidBody3D
 
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
-
 var timesBounced: int
 var moveDirection: Vector3
 
 func _ready() -> void:
-	moveDirection = transform.basis.z
-	await get_tree().create_timer(maxLifeTime).timeout
-	explode();
+	if not multiplayer.is_server():
+		set_process(false)
+		set_physics_process(false)
+	else:
+		moveDirection = transform.basis.z
+		await get_tree().create_timer(maxLifeTime).timeout
+		explode();
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
 	var collision = move_and_collide(moveDirection.normalized() * speed * delta)
 	if collision:
 		on_collision(collision.get_normal())
@@ -38,10 +41,8 @@ func on_collision(hit_normal: Vector3) -> void:
 	else:
 		moveDirection = moveDirection.bounce(hit_normal)
 		timesBounced += 1
-		
 	AudioManager.play_audio("bullet_bounce")
 
 func explode() -> void:
 	AudioManager.play_audio("bullet_explode")
 	animationPlayer.play("explode")
-	

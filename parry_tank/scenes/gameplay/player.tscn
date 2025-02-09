@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://btguxypod5xag"]
+
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/player.gd" id="1_ccpyb"]
+[ext_resource type="PackedScene" uid="uid://b8hwtkeakldbb" path="res://parry_tank/scenes/gameplay/tank.tscn" id="2_ddjhj"]
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/player_input.gd" id="2_fjbc7"]
+[ext_resource type="PackedScene" uid="uid://bdyp2wwyn8hhn" path="res://parry_tank/scenes/gameplay/cursor.tscn" id="4_umf1a"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lv8ir"]
+properties/0/path = NodePath(".:player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_eidl7"]
+properties/0/path = NodePath("InputSynchronizer:input_move_direction")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("InputSynchronizer:input_aim_direction")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_ccpyb")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lv8ir")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_eidl7")
+script = ExtResource("2_fjbc7")
+
+[node name="Tank" parent="InputSynchronizer" node_paths=PackedStringArray("spawnRootNode") instance=ExtResource("2_ddjhj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+spawnRootNode = NodePath("../..")
+
+[node name="Cursor" parent="." instance=ExtResource("4_umf1a")]

@@ -21,7 +21,7 @@ var lastPosition: Vector2
 func _process(_delta):
 	width = (get_viewport_rect().size.y / 1080) * _width
 	
-	var pos = get_global_mouse_position()
+	var pos = global_position
 	var distanceMoved = Vector2(pos - lastPosition).length()
 	distance += distanceMoved
 	lastPosition = pos
@@ -42,6 +42,6 @@ func _process(_delta):
 		
 	# Update points from line
 	clear_points()
-	add_point(pos) # Always one extra at the target
+	add_point(pos - global_position) # Always one extra at the target
 	for point in queue:
-		add_point(point.position)
+		add_point(point.position - global_position)

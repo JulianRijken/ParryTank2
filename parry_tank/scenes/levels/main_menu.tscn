@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhfp67a43lfe0"]
+
+[ext_resource type="Script" path="res://parry_tank/scripts/main_menu.gd" id="1_sni4p"]
+[ext_resource type="FontFile" uid="uid://cpacp05tt0rdd" path="res://addons/minimal-theme/Inter.ttc" id="2_d2abu"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_sni4p")
+
+[node name="MultiplayerHud" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.27691
+anchor_bottom = 0.493827
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="MultiplayerHud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = -37.0
+offset_right = 65.5
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerHud/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = -8.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostGame" type="Button" parent="MultiplayerHud/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d2abu")
+text = "Host Game"
+
+[node name="JoinGame" type="Button" parent="MultiplayerHud/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Join Game"
+
+[connection signal="pressed" from="MultiplayerHud/Panel/VBoxContainer/HostGame" to="." method="host_game_pressed"]
+[connection signal="pressed" from="MultiplayerHud/Panel/VBoxContainer/JoinGame" to="." method="join_game_pressed"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8it3els0aho5"]
 
 [ext_resource type="ArrayMesh" uid="uid://ds7aokexn1ubu" path="res://parry_tank/models/blocks/models/blocks_BarrleSmall.res" id="1_n3xs8"]
-[ext_resource type="Script" path="res://parry_tank/scripts/block.gd" id="2_181wk"]
-[ext_resource type="Material" path="res://parry_tank/materials/block1.tres" id="2_f23qu"]
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/block.gd" id="2_181wk"]
+[ext_resource type="Material" uid="uid://cy56gguc2yiiu" path="res://parry_tank/materials/block1.tres" id="2_f23qu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0te48"]
 

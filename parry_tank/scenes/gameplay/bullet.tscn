@@ -1,10 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3i11qjtiau18"]
+[gd_scene load_steps=12 format=3 uid="uid://c3i11qjtiau18"]
 
-[ext_resource type="Script" path="res://parry_tank/scripts/projectile.gd" id="1_kpsdj"]
-[ext_resource type="PackedScene" uid="uid://brg1ec6l6ox27" path="res://parry_tank/scenes/particles/smoke_trail.tscn" id="2_23fo2"]
-[ext_resource type="ArrayMesh" uid="uid://ce0il5fi1jp78" path="res://parry_tank/models/bullet/bullet_Bullet.res" id="2_amegj"]
-[ext_resource type="PackedScene" uid="uid://bx4007pinwq5q" path="res://parry_tank/scenes/particles/fire_ball.tscn" id="3_d6nvp"]
-[ext_resource type="PackedScene" uid="uid://7mry0mrs45hm" path="res://parry_tank/scenes/particles/puff_orbit_smoke.tscn" id="4_7be2g"]
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/projectile.gd" id="1_t5l7u"]
+[ext_resource type="PackedScene" uid="uid://brg1ec6l6ox27" path="res://parry_tank/scenes/particles/smoke_trail.tscn" id="2_xe16s"]
+[ext_resource type="PackedScene" uid="uid://bx4007pinwq5q" path="res://parry_tank/scenes/particles/fire_ball.tscn" id="3_0rcxt"]
+[ext_resource type="PackedScene" uid="uid://7mry0mrs45hm" path="res://parry_tank/scenes/particles/puff_orbit_smoke.tscn" id="4_pj6gb"]
+[ext_resource type="ArrayMesh" uid="uid://ce0il5fi1jp78" path="res://parry_tank/models/bullet/bullet_Bullet.res" id="5_38fg3"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rirja"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimationPlayer:current_animation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_g3rq8"]
 resource_name = "explode"
@@ -115,20 +126,23 @@ custom_integrator = true
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 1
-script = ExtResource("1_kpsdj")
+script = ExtResource("1_t5l7u")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_rirja")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6gn18")
 }
 
-[node name="SmokeTrail" parent="." instance=ExtResource("2_23fo2")]
+[node name="SmokeTrail" parent="." instance=ExtResource("2_xe16s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.382136)
 
-[node name="FireBall" parent="." instance=ExtResource("3_d6nvp")]
+[node name="FireBall" parent="." instance=ExtResource("3_0rcxt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.400945)
 
-[node name="PuffOrbitSmoke" parent="." instance=ExtResource("4_7be2g")]
+[node name="PuffOrbitSmoke" parent="." instance=ExtResource("4_pj6gb")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.368, 0, 0, 0, 0.368, 0, 0, 0, 0.368, 0, 0, 0)
@@ -137,10 +151,10 @@ shape = SubResource("SphereShape3D_7mj5o")
 [node name="BulletMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_0jo8t")
-mesh = ExtResource("2_amegj")
+mesh = ExtResource("5_38fg3")
 
 [node name="Light" type="MeshInstance3D" parent="BulletMesh"]
 transform = Transform3D(1.00897, 0, 0, 0, -1.00897, 3.07337e-08, 0, -8.82075e-08, -0.351552, -0.000384748, -5.36333e-09, -0.347832)
 material_override = SubResource("StandardMaterial3D_hy258")
-mesh = ExtResource("2_amegj")
+mesh = ExtResource("5_38fg3")
 skeleton = NodePath("../..")

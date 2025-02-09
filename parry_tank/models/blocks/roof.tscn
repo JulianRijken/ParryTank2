@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://cy56gguc2yiiu" path="res://parry_tank/materials/block1.tres" id="1_2glpm"]
 [ext_resource type="ArrayMesh" uid="uid://cakgfv44eoq15" path="res://parry_tank/models/blocks/models/blocks_Roof.res" id="1_scail"]
-[ext_resource type="Script" path="res://parry_tank/scripts/block.gd" id="2_5l4y7"]
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/block.gd" id="2_5l4y7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7jokj"]
 size = Vector3(3, 2, 2)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bdyp2wwyn8hhn"]
 
-[ext_resource type="Script" path="res://parry_tank/scripts/mouse_trail.gd" id="1_vgmal"]
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/mouse_trail.gd" id="1_vgmal"]
 [ext_resource type="Texture2D" uid="uid://b1iy8sh4mc85r" path="res://parry_tank/textures/Crosshair64.png" id="2_eth18"]
-[ext_resource type="Script" path="res://parry_tank/scripts/crosshair.gd" id="3_r7e73"]
+[ext_resource type="Script" path="res://parry_tank/scripts/gameplay/crosshair.gd" id="3_r7e73"]
 
 [sub_resource type="Curve" id="Curve_t6e2i"]
 _data = [Vector2(0, 1), 0.12505, -0.0431205, 0, 0, Vector2(1, 0), -0.0213768, 0.0, 0, 0]
@@ -11,7 +11,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_w6531"]
 colors = PackedColorArray(0.32, 0.354, 1, 0.584314, 1, 1, 1, 0.231373)
 
-[node name="Cursor" type="Control"]
+[node name="Crosshair" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("3_r7e73")
 
 [node name="MouseTrail" type="Line2D" parent="."]
 points = PackedVector2Array(274, 206)
@@ -34,12 +35,14 @@ _width = 25.0
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.03
-anchor_bottom = 0.054
+anchor_left = -0.015625
+anchor_top = -0.0277778
+anchor_right = 0.014375
+anchor_bottom = 0.0262222
 offset_right = 1.44
 offset_bottom = 1.008
 pivot_offset = Vector2(18, 18)
 texture = ExtResource("2_eth18")
 expand_mode = 1
 stretch_mode = 5
-script = ExtResource("3_r7e73")
+metadata/_edit_use_anchors_ = true
